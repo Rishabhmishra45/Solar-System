@@ -1,28 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solar System - By Rishabh</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Solar System - By Rishabh</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <div class="sun">
-            <img src="sun.png" alt="sun">
-        </div>
-        <div class="mercury"></div>
-        <div class="venus"></div>
-        <div class="earth">
-            <div class="moon"></div>
-            <div class="mars"></div>
-            <div class="jupiter"></div>
-            <div class="saturn"></div>
-            <div class="uranus"></div>
-            <div class="neptune"></div>
-            <div class="pluto"></div>
-        </div>
+  <audio id="bg-music" loop>
+    <source src="assets/background.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div id="intro-screen">
+    <h1>Welcome to the Solar System</h1>
+    <button onclick="enterSite()">Enter Solar System 🚀</button>
+  </div>
+
+  <div id="stars-container"></div>
+
+  <div class="solar-system" id="main-content">
+    <div class="sun">
+      <img src="assets/sun.png" alt="Sun" />
     </div>
-    <script src="script.js"></script>
+
+    <!-- Mercury -->
+    <div class="orbit mercury">
+      <div class="planet"></div>
+      <div class="label">Mercury</div>
+    </div>
+
+    <!-- Venus -->
+    <div class="orbit venus">
+      <div class="planet"></div>
+      <div class="label">Venus</div>
+    </div>
+
+    <!-- Earth with Moon -->
+    <div class="orbit earth">
+      <div class="planet-with-moon">
+        <div class="earth-planet"></div>
+        <div class="moon-orbit">
+          <div class="moon"></div>
+        </div>
+      </div>
+      <div class="label">Earth</div>
+    </div>
+
+    <!-- Mars -->
+    <div class="orbit mars">
+      <div class="planet"></div>
+      <div class="label">Mars</div>
+    </div>
+
+    <!-- Jupiter -->
+    <div class="orbit jupiter">
+      <div class="planet"></div>
+      <div class="label">Jupiter</div>
+    </div>
+
+    <!-- Saturn -->
+    <div class="orbit saturn">
+      <div class="planet"></div>
+      <div class="label">Saturn</div>
+    </div>
+
+    <!-- Uranus -->
+    <div class="orbit uranus">
+      <div class="planet"></div>
+      <div class="label">Uranus</div>
+    </div>
+
+    <!-- Neptune -->
+    <div class="orbit neptune">
+      <div class="planet"></div>
+      <div class="label">Neptune</div>
+    </div>
+
+    <!-- Pluto -->
+    <div class="orbit pluto">
+      <div class="planet"></div>
+      <div class="label">Pluto</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

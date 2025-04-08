@@ -1,4 +1,17 @@
-// === Create animated glowing and rotating stars ===
+// === Planet Start Angles (deg) ===
+const planetStartAngles = {
+    mercury: 169,
+    venus: 19,
+    earth: 341,
+    mars: 354,
+    jupiter: 44,
+    saturn: 291,
+    uranus: 149,
+    neptune: 203,
+    pluto: 146
+};
+
+// === Create animated glowing stars ===
 function createStars() {
     const container = document.getElementById("stars-container");
 
@@ -26,34 +39,31 @@ function createStars() {
 
         container.appendChild(star);
     }
-
-    container.style.animation = "rotate-stars 1800s linear infinite";
 }
 
-// === Set random initial rotation angle and start infinite CSS animation ===
-function initializeOrbits() {
+// === Apply planet orbit rotation with fixed start angle ===
+function setPlanetAngles() {
     const orbits = document.querySelectorAll(".orbit");
 
-    orbits.forEach((orbit, index) => {
-        const randomAngle = Math.floor(Math.random() * 360);
-        orbit.style.transform = `translate(-50%, -50%) rotate(${randomAngle}deg)`;
+    orbits.forEach(orbit => {
+        const planetName = orbit.classList[1]; // e.g., 'mercury', 'venus', etc.
+        const angle = planetStartAngles[planetName];
 
-        const duration = getComputedStyle(orbit).animationDuration;
+        if (angle !== undefined) {
+            // Set initial rotation and continue 360deg animation
+            orbit.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+            orbit.style.animation = `orbit-rotate-${planetName} ${orbit.style.animationDuration || '40s'} linear infinite`;
 
-        // Use a slight timeout to ensure transform is applied before animation starts
-        setTimeout(() => {
-            orbit.style.animation = `orbit-rotate ${duration} linear infinite`;
-        }, 50);
-    });
-}
-
-// === Rotate planets on their axis ===
-function rotatePlanetsOnAxis() {
-    const allPlanets = document.querySelectorAll(".planet, .earth-planet");
-
-    allPlanets.forEach((planet, i) => {
-        const duration = 2 + i * 0.5;
-        planet.style.animation = `spinPlanet ${duration}s linear infinite`;
+            // Inject custom keyframe for each planet with specific start angle
+            const styleSheet = document.styleSheets[0];
+            const keyframeName = `orbit-rotate-${planetName}`;
+            const keyframes =
+                `@keyframes ${keyframeName} {
+                    0% { transform: translate(-50%, -50%) rotate(${angle}deg); }
+                    100% { transform: translate(-50%, -50%) rotate(${angle + 360}deg); }
+                }`;
+            styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
+        }
     });
 }
 
@@ -62,11 +72,11 @@ function playMusic() {
     const audio = document.getElementById("bg-music");
     audio.volume = 0.4;
     audio.play().catch(err => {
-        console.warn("User interaction needed to play music:", err);
+        console.warn("Music can't play until user interacts:", err);
     });
 }
 
-// === Enter button ===
+// === Remove intro screen & show solar system ===
 function enterSite() {
     const intro = document.getElementById("intro-screen");
     const mainContent = document.getElementById("main-content");
@@ -78,15 +88,12 @@ function enterSite() {
         intro.style.display = "none";
         mainContent.style.display = "flex";
         playMusic();
+        setPlanetAngles();
     }, 1000);
 }
 
 // === On page load ===
 window.addEventListener("DOMContentLoaded", () => {
     createStars();
-    initializeOrbits();
-    rotatePlanetsOnAxis();
-
-    // Hide solar system initially
     document.getElementById("main-content").style.display = "none";
 });

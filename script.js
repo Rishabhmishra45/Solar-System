@@ -1,13 +1,13 @@
 // === Planet Start Angles (deg) ===
 const planetStartAngles = {
     mercury: 169,
-    venus: 19,
+    venus: 30,
     earth: 341,
-    mars: 354,
+    mars: 280,
     jupiter: 44,
-    saturn: 291,
-    uranus: 149,
-    neptune: 203,
+    saturn: 120,
+    uranus: 190,
+    neptune: 300,
     pluto: 146
 };
 

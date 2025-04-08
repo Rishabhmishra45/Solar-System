@@ -84,7 +84,7 @@ body {
     box-shadow: 0 0 10px gold;
 }
 
-/* Solar system */
+/* Solar system - DESKTOP VERSION (unchanged) */
 .solar-system {
     position: absolute;
     width: 2000px;
@@ -299,79 +299,211 @@ body {
     }
 }
 
-/* Responsive */
+/* MOBILE VERSION (using vmin) */
 @media (max-width: 768px) {
     .solar-system {
-        transform: scale(0.55);
-        transform-origin: center;
-        width: 800px;
-        height: 800px;
+        width: 95vmin;
+        height: 95vmin;
+        margin: 0 auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
+    /* Sun */
     .sun img {
-        width: 60px;
-        height: 60px;
+        width: 14vmin;
+        height: 14vmin;
     }
 
-    .planet,
-    .earth-planet {
-        width: 18px;
-        height: 18px;
-    }
-
-    .moon {
-        width: 8px;
-        height: 8px;
-        transform: rotate(0deg) translateX(15px) translateY(-50%);
-    }
-
-    .moon-orbit {
-        width: 30px;
-        height: 30px;
-    }
-
+    /* Orbits */
     .mercury {
-        width: 120px;
-        height: 120px;
+        width: 20vmin;
+        height: 20vmin;
     }
 
     .venus {
-        width: 170px;
-        height: 170px;
+        width: 30vmin;
+        height: 30vmin;
     }
 
     .earth {
-        width: 220px;
-        height: 220px;
+        width: 40vmin;
+        height: 40vmin;
     }
 
     .mars {
-        width: 270px;
-        height: 270px;
+        width: 50vmin;
+        height: 50vmin;
     }
 
     .jupiter {
-        width: 330px;
-        height: 330px;
+        width: 60vmin;
+        height: 60vmin;
     }
 
     .saturn {
-        width: 390px;
-        height: 390px;
+        width: 70vmin;
+        height: 70vmin;
     }
 
     .uranus {
-        width: 450px;
-        height: 450px;
+        width: 80vmin;
+        height: 80vmin;
     }
 
     .neptune {
-        width: 510px;
-        height: 510px;
+        width: 88vmin;
+        height: 88vmin;
     }
 
     .pluto {
-        width: 570px;
-        height: 570px;
+        width: 97vmin;
+        height: 97vmin;
     }
+
+    /* Adjusted to stay inside */
+
+    /* Planets */
+    .mercury .planet {
+        width: 4vmin;
+        height: 4vmin;
+    }
+
+    .venus .planet {
+        width: 5vmin;
+        height: 5vmin;
+    }
+
+    .earth-planet {
+        width: 8vmin;
+        height: 8vmin;
+    }
+
+    .mars .planet {
+        width: 4.2vmin;
+        height: 4.2vmin;
+    }
+
+    .jupiter .planet {
+        width: 10vmin;
+        height: 10vmin;
+    }
+
+    .saturn .planet {
+        width: 7vmin;
+        height: 7vmin;
+    }
+
+    .uranus .planet {
+        width: 5vmin;
+        height: 5vmin;
+    }
+
+    .neptune .planet {
+        width: 6vmin;
+        height: 6vmin;
+    }
+
+    .pluto .planet {
+        width: 3.8vmin;
+        height: 3.8vmin;
+    }
+
+    /* Moon orbit and moon */
+    .moon-orbit {
+        width: 6vmin;
+        height: 6vmin;
+    }
+
+    .moon {
+        width: 3vmin;
+        height: 3vmin;
+        transform: rotate(0deg) translateX(6vmin) translateY(-50%);
+    }
+
+    /* Intro text adjustments */
+    #intro-screen h1 {
+        font-size: 2.2rem;
+    }
+
+    #intro-screen button {
+        font-size: 1rem;
+        padding: 10px 18px;
+    }
+}
+
+/* Additional adjustment for very small mobile devices */
+@media (max-width: 480px) {
+    .solar-system {
+        width: 130vmin;
+        height: 130vmin;
+    }
+
+    #intro-screen h1 {
+        font-size: 2rem;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 50px;
+    background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+    z-index: 1000;
+}
+
+nav h2 {
+    color: var(--text-color);
+    font-size: 24px;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin-left: auto;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 550;
+    font-size: 16px;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    position: absolute;
+    background: var(--text-color);
+    bottom: -5px;
+    left: 0;
+    transition: 0.5s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
 }

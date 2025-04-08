@@ -6,8 +6,8 @@
 
 body {
     background: black;
-    overflow: hidden;
     font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
 #stars-container {
@@ -17,6 +17,17 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
+}
+
+/* Star animation */
+@keyframes twinkle {
+    from {
+        opacity: 0.3;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 /* Intro screen */
@@ -69,17 +80,19 @@ body {
     box-shadow: 0 0 10px gold;
 }
 
-/* Solar system container */
+/* Solar system */
 .solar-system {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
+    position: absolute;
+    width: 2000px;
+    height: 2000px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.6);
 }
 
-/* Sun */
 .sun img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -91,13 +104,68 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    border: 1px dashed rgba(255, 255, 255, 0.2);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
     border-radius: 50%;
     transform: translate(-50%, -50%);
     animation: rotate 40s linear infinite;
+    transform-origin: center center;
 }
 
-/* Planet */
+/* Sizes */
+.mercury {
+    width: 220px;
+    height: 220px;
+    animation-duration: 20s;
+}
+
+.venus {
+    width: 330px;
+    height: 330px;
+    animation-duration: 30s;
+}
+
+.earth {
+    width: 450px;
+    height: 450px;
+    animation-duration: 35s;
+}
+
+.mars {
+    width: 570px;
+    height: 570px;
+    animation-duration: 40s;
+}
+
+.jupiter {
+    width: 670px;
+    height: 670px;
+    animation-duration: 45s;
+}
+
+.saturn {
+    width: 790px;
+    height: 790px;
+    animation-duration: 50s;
+}
+
+.uranus {
+    width: 900px;
+    height: 900px;
+    animation-duration: 55s;
+}
+
+.neptune {
+    width: 1010px;
+    height: 1010px;
+    animation-duration: 60s;
+}
+
+.pluto {
+    width: 1130px;
+    height: 1130px;
+    animation-duration: 65s;
+}
+
 .planet,
 .earth-planet {
     background-size: cover;
@@ -111,111 +179,11 @@ body {
 
 .earth-planet {
     background-image: url('assets/earth.png');
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
 }
 
-/* Label - ABOVE PLANET horizontally */
-.label {
-    position: absolute;
-    left: 107%;
-    top: 45%;
-    transform: translate(-50%, -150%) rotate(0deg);
-    /* pushed up above planet */
-    transform-origin: center;
-    color: white;
-    font-size: 0.75rem;
-    white-space: nowrap;
-    animation: rotate 150s linear infinite;
-}
-
-/* Earth and Moon */
-.planet-with-moon {
-    position: absolute;
-    top: 50%;
-    left: 100%;
-    transform: translate(-50%, -50%);
-}
-
-.moon-orbit {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    animation: moonSpin 3s linear infinite;
-}
-
-.moon {
-    width: 20px;
-    height: 20px;
-    background-image: url('assets/moon.png');
-    background-size: cover;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: rotate(0deg) translateX(30px) translateY(-50%);
-}
-
-/* Orbit Sizes with More Gap */
-.mercury {
-    width: 150px;
-    height: 150px;
-    animation-duration: 10s;
-}
-
-.venus {
-    width: 220px;
-    height: 220px;
-    animation-duration: 14s;
-}
-
-.earth {
-    width: 300px;
-    height: 300px;
-    animation-duration: 18s;
-}
-
-.mars {
-    width: 380px;
-    height: 380px;
-    animation-duration: 22s;
-}
-
-.jupiter {
-    width: 470px;
-    height: 470px;
-    animation-duration: 26s;
-}
-
-.saturn {
-    width: 570px;
-    height: 570px;
-    animation-duration: 30s;
-}
-
-.uranus {
-    width: 670px;
-    height: 670px;
-    animation-duration: 34s;
-}
-
-.neptune {
-    width: 770px;
-    height: 770px;
-    animation-duration: 38s;
-}
-
-.pluto {
-    width: 870px;
-    height: 870px;
-    animation-duration: 42s;
-}
-
-/* Backgrounds */
+/* Planet backgrounds */
 .mercury .planet {
     background-image: url('assets/mercury.png');
     width: 30px;
@@ -264,12 +232,56 @@ body {
     height: 30px;
 }
 
+/* Labels
+.label {
+    position: absolute;
+    left: 107%;
+    top: 45%;
+    transform: translate(-50%, -150%);
+    color: white;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    animation: rotate 150s linear infinite;
+} */
+
+/* Earth & Moon */
+.planet-with-moon {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate(-50%, -50%);
+}
+
+.moon-orbit {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    animation: moonSpin 3s linear infinite;
+}
+
+.moon {
+    width: 20px;
+    height: 20px;
+    background-image: url('assets/moon.png');
+    background-size: cover;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: rotate(0deg) translateX(40px) translateY(-50%);
+}
+
 /* Animations */
 @keyframes rotate {
     100% {
-        transform: translate(-50%, -50%) rotate(360deg);
+      transform: rotate(360deg);
     }
-}
+  }
+  
 
 @keyframes moonSpin {
     0% {
@@ -281,12 +293,40 @@ body {
     }
 }
 
+@keyframes spinPlanet {
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  
+  @keyframes rotate-stars {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes orbit-rotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+  
+
 /* Responsive */
 @media (max-width: 768px) {
+    #solar-wrapper {
+        overflow: scroll;
+    }
+
     .solar-system {
         transform: scale(0.55);
-        /* Shrinks entire solar system for mobile */
         transform-origin: center;
+        width: 800px;
+        height: 800px;
     }
 
     .sun img {
@@ -302,7 +342,6 @@ body {
 
     .label {
         font-size: 0.6rem;
-        transform: translate(-50%, -150%);
     }
 
     .moon {
@@ -316,7 +355,6 @@ body {
         height: 30px;
     }
 
-    /* Adjust orbit sizes for smaller screens */
     .mercury {
         width: 120px;
         height: 120px;
@@ -362,3 +400,5 @@ body {
         height: 570px;
     }
 }
+
+

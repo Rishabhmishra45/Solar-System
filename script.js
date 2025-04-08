@@ -1,4 +1,4 @@
-// === Create animated glowing stars ===
+// === Create animated glowing and rotating stars ===
 function createStars() {
     const container = document.getElementById("stars-container");
 
@@ -6,7 +6,7 @@ function createStars() {
         const star = document.createElement("div");
         star.className = "star";
 
-        const size = Math.random() * 2 + 0.5; // 0.5px to 2.5px
+        const size = Math.random() * 2 + 0.5;
         const top = `${Math.random() * 100}%`;
         const left = `${Math.random() * 100}%`;
         const opacity = Math.random();
@@ -26,25 +26,51 @@ function createStars() {
 
         container.appendChild(star);
     }
+
+    container.style.animation = "rotate-stars 1800s linear infinite";
+}
+
+// === Set random initial rotation angle and start infinite CSS animation ===
+function initializeOrbits() {
+    const orbits = document.querySelectorAll(".orbit");
+
+    orbits.forEach((orbit, index) => {
+        const randomAngle = Math.floor(Math.random() * 360);
+        orbit.style.transform = `translate(-50%, -50%) rotate(${randomAngle}deg)`;
+
+        const duration = getComputedStyle(orbit).animationDuration;
+
+        // Use a slight timeout to ensure transform is applied before animation starts
+        setTimeout(() => {
+            orbit.style.animation = `orbit-rotate ${duration} linear infinite`;
+        }, 50);
+    });
+}
+
+// === Rotate planets on their axis ===
+function rotatePlanetsOnAxis() {
+    const allPlanets = document.querySelectorAll(".planet, .earth-planet");
+
+    allPlanets.forEach((planet, i) => {
+        const duration = 2 + i * 0.5;
+        planet.style.animation = `spinPlanet ${duration}s linear infinite`;
+    });
 }
 
 // === Background music control ===
 function playMusic() {
     const audio = document.getElementById("bg-music");
     audio.volume = 0.4;
-
-    // Safe autoplay with user interaction fallback
     audio.play().catch(err => {
-        console.warn("Music can't play until user interacts:", err);
+        console.warn("User interaction needed to play music:", err);
     });
 }
 
-// === Remove intro screen & show solar system ===
+// === Enter button ===
 function enterSite() {
     const intro = document.getElementById("intro-screen");
     const mainContent = document.getElementById("main-content");
 
-    // Add fade-out effect
     intro.style.transition = "opacity 1s ease";
     intro.style.opacity = "0";
 
@@ -58,7 +84,9 @@ function enterSite() {
 // === On page load ===
 window.addEventListener("DOMContentLoaded", () => {
     createStars();
+    initializeOrbits();
+    rotatePlanetsOnAxis();
 
-    // Hide main content initially
+    // Hide solar system initially
     document.getElementById("main-content").style.display = "none";
 });

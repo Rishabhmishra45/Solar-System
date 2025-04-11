@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planet Distances</title>
+  <style>
+    body {
+      background: radial-gradient(ellipse at center, #000 60%, #111 100%);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .navbar .logo {
+      font-size: 20px;
+      color: cyan;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    h1 {
+      color: cyan;
+      margin-bottom: 30px;
+    }
+
+    .planet-list a {
+      color: white;
+      background: #0ff2;
+      padding: 10px 20px;
+      margin: 8px;
+      display: inline-block;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .planet-list a:hover {
+      background: cyan;
+      color: black;
+    }
+
+    .planet-info {
+      margin-top: 20px;
+      display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .planet-info img {
+      width: 180px;
+      border-radius: 50px;
+      margin-bottom: 15px;
+      animation: rotate 10s linear infinite;
+    }
+
+    .planet-description {
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: left;
+      margin: 20px auto;
+      max-width: 1050px;
+    }
+
+    .back-logo {
+      font-size: 18px;
+      color: cyan;
+      font-weight: bold;
+      margin-top: 20px;
+      cursor: pointer;
+      display: inline-block;
+      transition: 0.3s;
+    }
+
+    .back-logo:hover {
+      color: white;
+    }
+
+    .about-section {
+      margin-top: 50px;
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: left;
+      max-width: 1200px;
+      margin-inline: auto;
+    }
+
+    .about-section h2 {
+      color: cyan;
+      margin-bottom: 10px;
+    }
+
+    .about-section p {
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Mobile and Tablet Responsive Styles */
+    @media only screen and (max-width: 768px) {
+      .planet-list a {
+        padding: 8px 16px;
+        margin: 6px;
+        font-size: 14px;
+      }
+
+      .planet-info img {
+        width: 140px;
+      }
+
+      .planet-description {
+        padding: 12px;
+        margin: 15px auto;
+      }
+
+      .about-section {
+        padding: 15px;
+        margin-top: 30px;
+      }
+    }
+
+    @media only screen and (max-width: 480px) {
+      body {
+        padding: 10px;
+      }
+
+      .navbar .logo {
+        font-size: 18px;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .planet-list a {
+        padding: 6px 12px;
+        margin: 4px;
+        font-size: 12px;
+      }
+
+      .planet-info img {
+        width: 120px;
+      }
+
+      .planet-description {
+        padding: 10px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="navbar">
+    <div class="logo" onclick="goBack()">☀ Solar Explorer</div>
+  </div>
+
+  <h1>Explore Planet Distances</h1>
+
+  <div class="planet-list" id="planet-list">
+    <a onclick="showPlanet('Mercury')">Mercury</a>
+    <a onclick="showPlanet('Venus')">Venus</a>
+    <a onclick="showPlanet('Earth')">Earth</a>
+    <a onclick="showPlanet('Moon')">Moon</a>
+    <a onclick="showPlanet('Mars')">Mars</a>
+    <a onclick="showPlanet('Jupiter')">Jupiter</a>
+    <a onclick="showPlanet('Saturn')">Saturn</a>
+    <a onclick="showPlanet('Uranus')">Uranus</a>
+    <a onclick="showPlanet('Neptune')">Neptune</a>
+    <a onclick="showPlanet('Pluto')">Pluto</a>
+  </div>
+
+  <div class="planet-info" id="planet-info"></div>
+
+  <div class="about-section" id="about-section">
+    <h2>About This Page</h2>
+    <p>This interactive solar system explorer lets you view the distance of each planet from the Sun and Earth. It also
+      provides interesting facts about each planet and the Moon, including their physical properties, atmosphere, moons,
+      discovery, and more.</p>
+    <p>When you click a planet, you'll see its image, distance from the Sun, distance from Earth, and a set of
+      interesting facts. The back logo ("☀ Solar Explorer") brings you back to the full planet list.</p>
+    <p>The purpose of this page is to make space learning fun and easy to visualize. Enjoy your journey across our
+      amazing solar system!</p>
+  </div>
+
+  <script>
+    const planetData = {
+      Mercury: {
+        distance: "57.9 million km from Sun",
+        fromEarth: "91.7 million km",
+        image: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg",
+        description: `Mercury is the smallest planet in our solar system.
+It's just slightly larger than Earth's Moon.
+It has no atmosphere to retain heat.
+Days are extremely hot and nights freezing cold.
+It completes an orbit in just 88 Earth days.
+Mercury has a heavily cratered surface.
+No moons orbit around Mercury.
+It's the closest planet to the Sun.
+It has a large iron core inside.
+It has been visited by Mariner 10 and Messenger.`
+      },
+      Venus: {
+        distance: "108.2 million km from Sun",
+        fromEarth: "41.4 million km",
+        image: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg",
+        description: `Venus is the second planet from the Sun.
+It's similar in size to Earth but hotter.
+Its atmosphere is mostly carbon dioxide.
+Venus has thick clouds of sulfuric acid.
+Surface temperatures can melt lead.
+It rotates in the opposite direction.
+A day on Venus is longer than its year.
+It has mountains and volcanoes.
+No moons orbit Venus.
+It's often called Earth's twin.`
+      },
+      Earth: {
+        distance: "149.6 million km from Sun",
+        fromEarth: "0 km (Home)",
+        image: "https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg",
+        description: `Earth is the third planet from the Sun.
+It's the only planet known to support life.
+About 71% of its surface is water.
+It has a protective magnetic field.
+Earth has one natural satellite: the Moon.
+Its atmosphere contains oxygen.
+It has diverse ecosystems and climates.
+Earth has plate tectonics.
+It completes a rotation in 24 hours.
+It takes 365.25 days to orbit the Sun.`
+      },
+      Moon: {
+        distance: "384,400 km from Earth",
+        fromEarth: "384,400 km",
+        image: "https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg",
+        description: `The Moon is Earth's only natural satellite.
+It is about 1/6th the size of Earth.
+It causes ocean tides on Earth.
+Its surface has craters and basins.
+It has no atmosphere or weather.
+It always shows the same face to Earth.
+It takes 27.3 days to orbit Earth.
+Humans first landed on it in 1969.
+It affects animal behavior and culture.
+It reflects sunlight, not emit its own.`
+      },
+      Mars: {
+        distance: "227.9 million km from Sun",
+        fromEarth: "78.3 million km",
+        image: "https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg",
+        description: `Mars is called the Red Planet.
+It has the tallest volcano in the solar system.
+Its surface is rocky and dusty.
+It has two moons: Phobos and Deimos.
+Seasons exist on Mars like Earth.
+It has polar ice caps.
+Thin atmosphere mainly of CO2.
+Evidence of ancient water flows.
+Numerous rovers have explored Mars.
+Mars might host humans in future.`
+      },
+      Jupiter: {
+        distance: "778.5 million km from Sun",
+        fromEarth: "628.7 million km",
+        image: "https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg",
+        description: `Jupiter is the largest planet in the solar system.
+It's a gas giant with no solid surface.
+Famous for its Great Red Spot storm.
+It has 95+ moons including Ganymede.
+It has a faint ring system.
+Fastest spinning planet - 10-hour day.
+Has strong magnetic fields.
+Composed mostly of hydrogen and helium.
+Many probes have visited Jupiter.
+It influences many nearby asteroids.`
+      },
+      Saturn: {
+        distance: "1.43 billion km from Sun",
+        fromEarth: "1.2 billion km",
+        image: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg",
+        description: `Saturn is famous for its rings.
+It's a gas giant like Jupiter.
+Made of hydrogen and helium gases.
+It has 145+ known moons.
+Titan is its largest moon.
+Rings made of ice and rock.
+It's less dense than water.
+Has a very strong magnetic field.
+Cassini studied Saturn in detail.
+Has strong winds and storms.`
+      },
+      Uranus: {
+        distance: "2.87 billion km from Sun",
+        fromEarth: "2.6 billion km",
+        image: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg",
+        description: `Uranus is an ice giant.
+It rotates on its side.
+Its atmosphere has methane, giving blue color.
+It has a faint ring system.
+27 known moons orbit Uranus.
+It's the coldest planet in the solar system.
+Orbits the Sun every 84 years.
+Discovered in 1781 by William Herschel.
+Winds can reach 900 km/h.
+Visited only once by Voyager 2.`
+      },
+      Neptune: {
+        distance: "4.50 billion km from Sun",
+        fromEarth: "4.3 billion km",
+        image: "https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg",
+        description: `Neptune is the farthest known planet.
+It's an ice giant with strong storms.
+Known for its deep blue color.
+It has 14 known moons.
+Triton is its largest moon.
+Neptune has supersonic winds.
+It has faint dark rings.
+It was discovered in 1846.
+Voyager 2 visited Neptune in 1989.
+Completes one orbit in 165 years.`
+      },
+      Pluto: {
+        distance: "5.91 billion km from Sun",
+        fromEarth: "5.1 billion km",
+        image: "https://upload.wikimedia.org/wikipedia/commons/2/2a/Nh-pluto-in-true-color_2x_JPEG-edit-frame.jpg",
+        description: `Pluto is a dwarf planet.
+It's part of the Kuiper Belt.
+Has five known moons, largest is Charon.
+It has a heart-shaped ice region.
+Discovered in 1930 by Clyde Tombaugh.
+Pluto has a thin atmosphere.
+Its orbit is highly elliptical.
+Surface has nitrogen and methane ices.
+New Horizons visited it in 2015.
+Day on Pluto lasts over 6 Earth days.`
+      }
+    };
+
+    function showPlanet(name) {
+      const info = planetData[name];
+      const infoDiv = document.getElementById("planet-info");
+      const planetList = document.getElementById("planet-list");
+      const aboutSection = document.getElementById("about-section");
+
+      planetList.style.display = "none";
+      aboutSection.style.display = "none";
+      infoDiv.style.display = "block";
+
+      infoDiv.innerHTML = `
+        <h2>${name}</h2>
+        <img src="${info.image}" alt="${name}">
+        <p><strong>Distance from Sun:</strong> ${info.distance}</p>
+        <p><strong>Distance from Earth:</strong> ${info.fromEarth}</p>
+        <div class="planet-description">
+          ${info.description.split('\n').map(line => `<p>${line}</p>`).join('')}
+        </div>
+        <div class="back-logo" onclick="goBack()">☀ Back to Solar Explorer</div>
+      `;
+    }
+
+    function goBack() {
+      document.getElementById("planet-info").style.display = "none";
+      document.getElementById("planet-list").style.display = "block";
+      document.getElementById("about-section").style.display = "block";
+    }
+  </script>
+
+</body>
+
+</html>

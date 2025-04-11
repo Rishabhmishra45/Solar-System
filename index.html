@@ -6,6 +6,18 @@
   <title>Solar System - By Rishabh</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="assets/favicon.png" />
+  <!-- Preload planet images -->
+  <link rel="preload" href="assets/sun.png" as="image">
+  <link rel="preload" href="assets/mercury.png" as="image">
+  <link rel="preload" href="assets/venus.png" as="image">
+  <link rel="preload" href="assets/earth.png" as="image">
+  <link rel="preload" href="assets/mars.png" as="image">
+  <link rel="preload" href="assets/jupiter.png" as="image">
+  <link rel="preload" href="assets/saturn.png" as="image">
+  <link rel="preload" href="assets/uranus.png" as="image">
+  <link rel="preload" href="assets/neptune.png" as="image">
+  <link rel="preload" href="assets/pluto.png" as="image">
+  <link rel="preload" href="assets/moon.png" as="image">
 </head>
 <body>
   <audio id="bg-music" loop>
@@ -17,6 +29,17 @@
     <button onclick="enterSite()">Enter Solar System 🚀</button>
   </div>
 
+  <!-- Navbar -->
+<!-- Navbar - Add 'hidden' class initially -->
+<div class="navbar hidden">
+  <div class="nav-links">
+    <a href="#" onclick="showAbout()">About</a>
+    <a href="distance.html" onclick="showDistances()">Distances</a>
+    <a href="#" onclick="showPlanetInfo()">Planet Info</a>
+  </div>
+  <button class="view-toggle" id="viewToggle" onclick="toggleView()">3D View</button>
+</div>
+
   <div id="stars-container"></div>
 
   <div class="solar-system" id="main-content">
@@ -27,13 +50,11 @@
     <!-- Mercury -->
     <div class="orbit mercury">
       <div class="planet"></div>
-      <!-- <div class="label">Mercury</div> -->
     </div>
 
     <!-- Venus -->
     <div class="orbit venus">
       <div class="planet"></div>
-      <!-- <div class="label">Venus</div> -->
     </div>
 
     <!-- Earth with Moon -->
@@ -44,43 +65,36 @@
           <div class="moon"></div>
         </div>
       </div>
-      <!-- <div class="label">Earth</div> -->
     </div>
 
     <!-- Mars -->
     <div class="orbit mars">
       <div class="planet"></div>
-      <!-- <div class="label">Mars</div> -->
     </div>
 
     <!-- Jupiter -->
     <div class="orbit jupiter">
       <div class="planet"></div>
-      <!-- <div class="label">Jupiter</div> -->
     </div>
 
     <!-- Saturn -->
     <div class="orbit saturn">
       <div class="planet"></div>
-      <!-- <div class="label">Saturn</div> -->
     </div>
 
     <!-- Uranus -->
     <div class="orbit uranus">
       <div class="planet"></div>
-      <!-- <div class="label">Uranus</div> -->
     </div>
 
     <!-- Neptune -->
     <div class="orbit neptune">
       <div class="planet"></div>
-      <!-- <div class="label">Neptune</div> -->
     </div>
 
     <!-- Pluto -->
     <div class="orbit pluto">
       <div class="planet"></div>
-      <!-- <div class="label">Pluto</div> -->
     </div>
   </div>
   <script src="script.js"></script>
